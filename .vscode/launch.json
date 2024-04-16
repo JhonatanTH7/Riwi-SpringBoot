@@ -2,6 +2,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "HelloWorldApplication",
+      "request": "launch",
+      "mainClass": "com.riwi.HelloWorld.HelloWorldApplication",
+      "projectName": "HelloWorld"
+    },
+    {
+      "type": "java",
+      "name": "FirstWebPageApplication",
+      "request": "launch",
+      "mainClass": "com.riwi.FirstWebPage.FirstWebPageApplication",
+      "projectName": ""
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-FirstWebPageApplication<FirstWebPage>",
       "request": "launch",
       "cwd": "${workspaceFolder}",

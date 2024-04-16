@@ -9,5 +9,4 @@ public class FirstWebPageApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FirstWebPageApplication.class, args);
 	}
-
 }
