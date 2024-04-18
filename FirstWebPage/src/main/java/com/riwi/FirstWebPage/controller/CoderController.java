@@ -1,14 +1,14 @@
 package com.riwi.FirstWebPage.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.riwi.FirstWebPage.entity.Coder;
 import com.riwi.FirstWebPage.services.CoderService;
@@ -22,10 +22,13 @@ public class CoderController {
 
     // Método para mostrar la vista y enviarle la vista de Coders
     @GetMapping
-    public String showViewGetAll(Model objModel) {
+    public String showViewGetAll(Model objModel, @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "3") int size) {
         // Llamo al servicio y guardo la lista de Coders
-        List<Coder> list = this.objCoderService.findAll();
+        Page<Coder> list = this.objCoderService.findPaginated(page - 1, size);
         objModel.addAttribute("coderList", list);
+        objModel.addAttribute("currentPage", page);
+        objModel.addAttribute("totalPages", list.getTotalPages());
         // Se debe retornar el nombre exacto de la vista html
         return "ViewCoder";
     }
@@ -58,8 +61,15 @@ public class CoderController {
 
     // Método para actualizar coder
     @PostMapping("/edit/{id}")
-    public String postMethodName(@PathVariable Long id, @ModelAttribute Coder objCoder) {
+    public String updateCoder(@PathVariable Long id, @ModelAttribute Coder objCoder) {
         this.objCoderService.update(id, objCoder);
+        return "redirect:/";
+    }
+
+    // Método para eliminar coder
+    @GetMapping("/delete/{id}")
+    public String deleteCoder(@PathVariable Long id) {
+        this.objCoderService.delete(id);
         return "redirect:/";
     }
 }
