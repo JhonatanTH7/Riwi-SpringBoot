@@ -30,15 +30,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="coders: ${coderList}">
-            <td th:text="${coders.id}"></td>
-            <td th:text="${coders.name}"></td>
-            <td th:text="${coders.age}"></td>
-            <td th:text="${coders.clan}"></td>
+          <tr th:each="coder: ${coderList}">
+            <td th:text="${coder.id}"></td>
+            <td th:text="${coder.name}"></td>
+            <td th:text="${coder.age}"></td>
+            <td th:text="${coder.clan}"></td>
             <td>
               <div class="d-flex gap-2">
+                <a
+                  th:href="@{/update/{id}(id=${coder.id})}"
+                  class="btn btn-primary"
+                  >Update</a
+                >
                 <a href="#" class="btn btn-danger">Delete</a>
-                <a href="#" class="btn btn-primary">Update</a>
               </div>
             </td>
           </tr>

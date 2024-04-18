@@ -15,6 +15,7 @@
     <h1 class="text-center my-5 fw-bold">Coder Form</h1>
     <div class="container">
       <form th:object="${coder}" th:action="${action}" method="post">
+        <input type="hidden" th:field="*{id}" th:value="${coder.id}" />
         <div class="form-floating mb-3">
           <input
             type="text"
@@ -22,6 +23,7 @@
             id="name"
             placeholder="Name"
             th:field="*{name}"
+            th:value="${coder.name}"
           />
           <label for="name">Name</label>
         </div>
@@ -32,6 +34,7 @@
             id="age"
             placeholder="Age"
             th:field="*{age}"
+            th:value="${coder.age}"
           />
           <label for="age">Age</label>
         </div>
@@ -42,6 +45,7 @@
             id="clan"
             placeholder="Clan"
             th:field="*{clan}"
+            th:value="${coder.clan}"
           />
           <label for="clan">Clan</label>
         </div>
