@@ -19,8 +19,8 @@ public class ProductService implements IProductService {
     private final ProductRepository objProductRepository;
 
     @Override
-    public Product save(Product product) {
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    public Product findById(Long id) {
+        return this.objProductRepository.findById(id).orElseThrow();
     }
 
     @Override
@@ -29,18 +29,21 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product findById(Long id) {
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+    public Product save(Product objProduct) {
+        return this.objProductRepository.save(objProduct);
     }
 
     @Override
-    public boolean delete(Long id) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public Product update(Long id, Product objProduct) {
+        this.objProductRepository.findById(id).orElseThrow();
+        objProduct.setId(id);
+        return this.objProductRepository.save(objProduct);
     }
 
     @Override
-    public Product update(Long id) {
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void delete(Long id) {
+        Product productFind = this.objProductRepository.findById(id).orElseThrow();
+        this.objProductRepository.delete(productFind);
     }
 
     @Override
