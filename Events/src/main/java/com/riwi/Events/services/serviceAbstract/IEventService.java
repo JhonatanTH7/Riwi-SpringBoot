@@ -1,13 +1,13 @@
 package com.riwi.Events.services.serviceAbstract;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import com.riwi.Events.entities.Event;
 
 public interface IEventService {
     public Event add(Event objEvent);
 
-    public List<Event> getAll();
+    public Page<Event> getAll(int page, int size);
 
     public Event findById(String id);
 

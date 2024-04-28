@@ -1,14 +1,15 @@
 package com.riwi.Events.controllers;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.riwi.Events.entities.Event;
@@ -28,8 +29,10 @@ public class EventController {
     private final IEventService objIEventService;
 
     @GetMapping
-    public ResponseEntity<List<Event>> getAll() {
-        return ResponseEntity.ok(this.objIEventService.getAll());
+    public ResponseEntity<Page<Event>> getAll(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "3") int size) {
+        return ResponseEntity.ok(this.objIEventService.getAll(page - 1, size));
     }
 
     @GetMapping(path = "/{id}")
