@@ -20,6 +20,7 @@ public class EventService implements IEventService {
 
     @Override
     public Event add(Event objEvent) {
+
         return this.objEventRepository.save(objEvent);
     }
 

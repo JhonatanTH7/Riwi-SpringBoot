@@ -1,5 +1,6 @@
 package com.riwi.Events.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,13 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<Event> add(@RequestBody Event objEvent) {
+        validateData(objEvent);
         return ResponseEntity.ok(this.objIEventService.add(objEvent));
     }
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<Event> update(@PathVariable String id, @RequestBody Event objEvent) {
+        validateData(objEvent);
         return ResponseEntity.ok(this.objIEventService.update(id, objEvent));
     }
 
@@ -50,5 +53,15 @@ public class EventController {
     public ResponseEntity<Void> delete(@PathVariable String id) {
         this.objIEventService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    private boolean validateData(Event objEvent) {
+        if (objEvent.getCapacity() < 1) {
+            throw new IllegalArgumentException("Capacity can't be less than one");
+        }
+        if (objEvent.getDate().isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Date entered has already passed");
+        }
+        return true;
     }
 }
