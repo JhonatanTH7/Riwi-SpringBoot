@@ -15,6 +15,7 @@ import com.riwi.RelationsInSpringboot.services.interfaces.ICompanyService;
 import com.riwi.RelationsInSpringboot.utils.dto.request.CompanyRequest;
 import com.riwi.RelationsInSpringboot.utils.dto.response.CompanyResponse;
 import com.riwi.RelationsInSpringboot.utils.dto.response.VacantToCompanyResponse;
+import com.riwi.RelationsInSpringboot.utils.exceptions.IdNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -43,12 +44,15 @@ public class CompanyService implements ICompanyService {
 
     @Override
     public CompanyResponse update(CompanyRequest request, String id) {
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Company objCompanyToUpdate = this.find(id);
+        Company company = this.requestToEntity(request, objCompanyToUpdate);
+        return this.entityToResponse(this.objCompanyRepository.save(company));
     }
 
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Company objCompany = this.find(id);
+        this.objCompanyRepository.delete(objCompany);
     }
 
     @Override
@@ -71,13 +75,13 @@ public class CompanyService implements ICompanyService {
     }
 
     private Company requestToEntity(CompanyRequest entity, Company objCompany) {
-        Company response = new Company();
-        BeanUtils.copyProperties(entity, response);
-        response.setVacants(new ArrayList<>());
-        return response;
+
+        BeanUtils.copyProperties(entity, objCompany);
+        objCompany.setVacants(new ArrayList<>());
+        return objCompany;
     }
 
     private Company find(String id) {
-        return this.objCompanyRepository.findById(id).orElseThrow();
+        return this.objCompanyRepository.findById(id).orElseThrow(() -> new IdNotFoundException("Company"));
     }
 }
