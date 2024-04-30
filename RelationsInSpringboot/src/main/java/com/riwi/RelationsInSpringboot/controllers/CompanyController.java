@@ -3,6 +3,7 @@ package com.riwi.RelationsInSpringboot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +41,8 @@ public class CompanyController {
     }
 
     @PostMapping
-    public ResponseEntity<CompanyResponse> insert(@RequestBody CompanyRequest objCompanyRequest) {
+    public ResponseEntity<CompanyResponse> insert(
+            @Validated @RequestBody CompanyRequest objCompanyRequest) {
         return ResponseEntity.ok(this.objICompanyService.create(objCompanyRequest));
     }
 
@@ -53,7 +55,7 @@ public class CompanyController {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<CompanyResponse> update(
-            @PathVariable String id,
+            @Validated @PathVariable String id,
             @RequestBody CompanyRequest objCompany) {
         return ResponseEntity.ok(this.objICompanyService.update(objCompany, id));
     }
