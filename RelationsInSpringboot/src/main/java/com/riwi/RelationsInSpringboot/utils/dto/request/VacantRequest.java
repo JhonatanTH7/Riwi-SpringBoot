@@ -20,7 +20,7 @@ public class VacantRequest {
     @NotBlank(message = "La Descripción es requerida")
     private String description;
     private StatusVacant status;
-    @Size(min = 0, max = 32)
+    @Size(min = 0, max = 36)
     @NotBlank(message = "el id de la Compañia es requerido")
     private String idCompany;
 }

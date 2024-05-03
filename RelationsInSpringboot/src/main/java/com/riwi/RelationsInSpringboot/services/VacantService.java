@@ -48,17 +48,24 @@ public class VacantService implements IVacantService {
 
     @Override
     public VacantResponse update(VacantRequest request, String id) {
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Vacant objVacant = this.find(id);
+        Company objCompany = this.objCompanyRepository.findById(request.getIdCompany())
+                .orElseThrow(() -> new IdNotFoundException("Company"));
+        objVacant = this.requestToVacant(request, objVacant);
+        objVacant.setCompany(objCompany);
+        objVacant.setStatus(request.getStatus());
+        return this.entityToResponse(this.objVacantRepository.save(objVacant));
     }
 
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Vacant objVacant = find(id);
+        this.objVacantRepository.delete(objVacant);
     }
 
     @Override
     public VacantResponse getById(String id) {
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+        return this.entityToResponse(this.find(id));
     }
 
     private VacantResponse entityToResponse(Vacant entity) {
@@ -74,5 +81,9 @@ public class VacantService implements IVacantService {
         BeanUtils.copyProperties(request, entity);
         entity.setStatus(StatusVacant.ACTIVE);
         return entity;
+    }
+
+    private Vacant find(String id) {
+        return this.objVacantRepository.findById(id).orElseThrow(() -> new IdNotFoundException("Vacant"));
     }
 }
