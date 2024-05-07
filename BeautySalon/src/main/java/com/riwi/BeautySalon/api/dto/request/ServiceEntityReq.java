@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ServiceReq {
+public class ServiceEntityReq {
 
     @NotNull(message = "El nombre del servicio es requerido")
     @NotBlank(message = "El nombre del servicio es requerido")

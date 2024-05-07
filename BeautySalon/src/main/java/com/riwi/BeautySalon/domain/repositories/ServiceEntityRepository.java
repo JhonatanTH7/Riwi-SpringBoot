@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.riwi.BeautySalon.domain.entities.ServiceEntity;
 
 @Repository
-public interface ServiceRepository extends JpaRepository<ServiceEntity, Long> {
+public interface ServiceEntityRepository extends JpaRepository<ServiceEntity, Long> {
 
     @Query("SELECT s FROM service s WHERE s.price BETWEEN :min AND :max")
     public List<ServiceEntity> selectBetweenPrice(BigDecimal min, BigDecimal max);
