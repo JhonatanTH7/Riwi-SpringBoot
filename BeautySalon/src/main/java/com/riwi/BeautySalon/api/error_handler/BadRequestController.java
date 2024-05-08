@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.riwi.BeautySalon.api.dto.errors.BaseErrorResponse;
 import com.riwi.BeautySalon.api.dto.errors.ErrorsResp;
+import com.riwi.BeautySalon.utils.exceptions.BadRequestException;
 
 @RestControllerAdvice
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
@@ -22,5 +23,16 @@ public class BadRequestController {
         exception.getAllErrors().forEach(error -> errors.add(error.getDefaultMessage()));
         return ErrorsResp.builder().code(HttpStatus.BAD_REQUEST.value()).status(HttpStatus.BAD_REQUEST.name())
                 .errors(errors).build();
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public BaseErrorResponse badRequest(BadRequestException exception) {
+        List<String> errors = new ArrayList<>();
+        errors.add(exception.getMessage());
+        return ErrorsResp.builder()
+                .code(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.name())
+                .errors(errors)
+                .build();
     }
 }

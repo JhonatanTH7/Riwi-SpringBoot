@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientResp {
+public class ClientEntityResp {
     private Long id;
     private String firstName;
     private String lastName;

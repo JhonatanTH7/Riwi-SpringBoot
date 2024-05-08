@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.riwi.BeautySalon.domain.entities.ClientEntity;
 
 @Repository
-public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
+public interface ClientEntityRepository extends JpaRepository<ClientEntity, Long> {
 
 }

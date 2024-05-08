@@ -7,7 +7,7 @@ import com.riwi.BeautySalon.utils.enums.SortType;
 public interface CrudService<RQ, RS, ID> {
     public Page<RS> getAll(int page, int size, SortType sortType);
 
-    public RS get(ID id);
+    public RS getById(ID id);
 
     public RS create(RQ request);
 

@@ -20,6 +20,7 @@ public class ServiceEntityReq {
     @NotBlank(message = "El nombre del servicio es requerido")
     private String name;
     private String description;
+    @NotNull
     @DecimalMin(value = "0.01", message = "El valor del servicio debe ser mayor a 0")
     private BigDecimal price;
 }

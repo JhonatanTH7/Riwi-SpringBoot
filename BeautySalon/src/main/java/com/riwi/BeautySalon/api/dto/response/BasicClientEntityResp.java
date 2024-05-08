@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BasicClientResp {
+public class BasicClientEntityResp {
     private Long id;
     private String firstName;
     private String lastName;

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientReq {
+public class ClientEntityReq {
     @NotBlank(message = "El nombre es requerido")
     private String firstName;
     @NotBlank(message = "El apellido es requerido")
