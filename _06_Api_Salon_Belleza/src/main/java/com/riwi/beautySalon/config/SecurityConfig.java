@@ -16,13 +16,12 @@ public class SecurityConfig {
     // metodo debe ser registrado como un bean en el contexto de la app
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
+        return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authReq -> authReq.requestMatchers(PUBLIC_RESOURCES)
                         .permitAll()
                         .anyRequest()
                         .authenticated())
                 .build();
-        return null;
     }
 }

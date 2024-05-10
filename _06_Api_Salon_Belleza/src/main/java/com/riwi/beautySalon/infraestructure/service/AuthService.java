@@ -1,6 +1,7 @@
 package com.riwi.beautySalon.infraestructure.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.riwi.beautySalon.api.dto.request.LoginReq;
 import com.riwi.beautySalon.api.dto.request.RegisterReq;
@@ -14,6 +15,7 @@ import com.riwi.beautySalon.utils.exception.BadRequestException;
 
 import lombok.AllArgsConstructor;
 
+@Service
 @AllArgsConstructor
 public class AuthService implements IAuthService {
 
