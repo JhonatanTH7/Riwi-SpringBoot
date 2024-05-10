@@ -10,11 +10,11 @@ public class AuthController {
 
     @PostMapping(path = "/auth/login")
     public String login() {
-        return "Haciendo Login";
+        return "Haciendo el Login";
     }
 
     @PostMapping(path = "/auth/register")
     public String register() {
-        return "Haciendo Register";
+        return "Haciendo el Register";
     }
 }
